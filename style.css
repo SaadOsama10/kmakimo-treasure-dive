@@ -36,6 +36,13 @@ html, body {
   background: radial-gradient(ellipse at 50% 0%, #0b4d72 0%, #062f4a 45%, #021424 100%);
 }
 
+/* Menu-type screens: stay centred when they fit, scroll (instead of clipping) when they don't */
+.screen:not(#game-screen) {
+  overflow-x: hidden;
+  overflow-y: auto;
+  justify-content: safe center;
+}
+
 .hidden {
   display: none !important;
 }
