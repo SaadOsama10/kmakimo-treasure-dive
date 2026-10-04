@@ -2,6 +2,10 @@
 
 **An Arabic underwater arcade game: dive for sunken treasure, catch fish, dodge sea monsters, and challenge a friend online.**
 
+<p align="center">
+  <a href="https://saadosama10.github.io/kmakimo-treasure-dive/"><img src="https://img.shields.io/badge/🎮_Play_Now-in_your_browser-3fb950?style=for-the-badge" alt="Play Now" height="48"></a>
+</p>
+
 [![Play Online](https://img.shields.io/badge/▶_Play_Online-GitHub_Pages-3fb950?style=flat-square)](https://saadosama10.github.io/kmakimo-treasure-dive/)
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
