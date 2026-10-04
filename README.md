@@ -123,7 +123,6 @@ The Firebase SDK is loaded from Google's CDN, and multiplayer needs an internet 
 
 - The interface is **Arabic only** (no language switcher).
 - Controls are arrow keys or on-screen buttons; there is no WASD or gamepad support.
-- The main menu is taller than a ~900px-high window, so on short screens the top (title) can be clipped.
 - Multiplayer is **unauthenticated**: anyone who knows or guesses a 4-digit room code can join an open room or write to it, and rooms support at most 2 players. There is no cheat protection — game state is client-side.
 - Rooms are not automatically cleaned up server-side.
 - Progress is stored per browser; clearing site data resets it.
