@@ -26,9 +26,9 @@ Or run it locally (see [How to Run](#how-to-run)).
 | **Shop** | **Game over** |
 | ![Shop](docs/screenshots/03-shop.png) | ![Game over](docs/screenshots/05-game-over.png) |
 
-| Multiplayer menu |
-|---|
-| ![Multiplayer menu](docs/screenshots/04-multiplayer-menu.png) |
+| Multiplayer menu | Character select | Online match (challenge banner top-right) |
+|---|---|---|
+| ![Multiplayer menu](docs/screenshots/04-multiplayer-menu.png) | ![Character select](docs/screenshots/06-multiplayer-character-select.png) | ![Multiplayer match](docs/screenshots/07-multiplayer-match.png) |
 
 ## Overview
 
