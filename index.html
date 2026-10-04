@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>KmaKimo - كيمو</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="rotate-prompt">
+  <div class="rotate-icon">📱</div>
+  <p class="rotate-text">اقلب تلفونك للوضع الأفقي 🔄</p>
+  <p class="rotate-subtext">اللعبة أحلى وأوضح بالعرض</p>
+</div>
+
+<div id="game-container">
+
+  <!-- شاشة التحميل -->
+  <div id="loading-screen" class="screen">
+    <div class="loader-ring"></div>
+    <p class="loading-text">عم نجهز الغطسة...</p>
+  </div>
+
+  <!-- شاشة البداية -->
+  <div id="start-screen" class="screen hidden">
+    <div class="bg-bubbles"></div>
+    <div class="rising-bubbles">
+      <span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <button id="mute-btn" class="icon-btn corner-btn" title="صوت">🔊</button>
+    <div class="pearls-badge" id="pearls-badge-start">💎 <span id="pearls-count-start">0</span></div>
+    <div id="best-score-start-wrap" class="best-score-badge hidden">
+      🏆 أعلى نتيجة: <span id="best-score-start">0</span>
+    </div>
+    <div class="title-wrap">
+      <h1 class="game-title">KmaKimo</h1>
+      <p class="game-subtitle">الغطس ع الكنز الغريق</p>
+    </div>
+    <div class="hero-frame">
+      <img id="hero-img-start" alt="كيمو" class="hero-image">
+    </div>
+    <div class="btn-row">
+      <button id="start-btn" class="main-btn"><span>ابدأ اللعب</span></button>
+      <button id="shop-btn" class="main-btn secondary-btn"><span>المتجر 🛍️</span></button>
+    </div>
+    <div class="btn-row">
+      <button id="mp-btn" class="main-btn mp-btn"><span>العب مع صاحبك 👥</span></button>
+    </div>
+    <div class="instructions">
+      <div class="instruction-row"><i class="key-icon">⬆⬇⬅➡</i> تحرك بالأسهم</div>
+      <div class="instruction-row"><i class="key-icon">💎</i> اجمع الكنوز وتجنب الأخطار</div>
+      <div class="instruction-row"><i class="key-icon">🫧</i> ارجع لسطح الميه تتنفس</div>
+      <div class="instruction-row"><i class="key-icon">🐟</i> اصطد السمك لما يكون عندك كنوز كفاية، وإلا لمسته بيقتلك!</div>
+      <div class="instruction-row"><i class="key-icon">🐢</i> السلاحف آمنة تمامًا، اصطدها براحتك بأي وقت</div>
+      <div class="instruction-row"><i class="key-icon">🐍</i> حيات البحر والقروش والقناديل خطر دائمًا، تجنبها</div>
+      <div class="instruction-row"><i class="key-icon">🐊</i> احذر تماسيح وعقارب بتمر أحيانًا عند سطح الميه، ما تضل واقف فوق كتير</div>
+      <div class="instruction-row"><i class="key-icon">🦛</i> فرس النهر خطر كبير وقوي، تجنبه بأي مكان بالبحر</div>
+      <div class="instruction-row"><i class="key-icon">✨</i> لو شفت غواصة نادرة، إلمسها وشوف شو رح يصير!</div>
+      <div class="instruction-row"><i class="key-icon">👥</i> دوس "العب مع صاحبك" تلعبوا سوا من جهازين وتتنافسوا بتحديات</div>
+    </div>
+  </div>
+
+  <!-- شاشة قائمة الملتيبلاير: إنشاء أو انضمام لغرفة -->
+  <div id="mp-menu-screen" class="screen hidden">
+    <div class="bg-bubbles"></div>
+    <button id="mp-menu-back-btn" class="icon-btn corner-btn right-corner" title="رجوع">↩️</button>
+    <h1 class="game-title mp-title">العب مع صاحبك</h1>
+    <p class="game-subtitle">وحد يعمل غرفة، والتاني يدخلها بنفس الكود</p>
+
+    <div class="mp-options">
+      <div class="mp-card">
+        <h3>أنشئ غرفة</h3>
+        <p>لعبتوا الاتنين لأول مرة؟ ابدأ هون</p>
+        <button id="mp-create-btn" class="main-btn"><span>إنشاء غرفة جديدة</span></button>
+      </div>
+      <div class="mp-card">
+        <h3>انضم لغرفة</h3>
+        <p>عندك كود من صاحبك؟ حطه هون</p>
+        <input id="mp-code-input" class="mp-code-input" type="text" inputmode="numeric" maxlength="4" placeholder="كود من ٤ أرقام">
+        <button id="mp-join-btn" class="main-btn secondary-btn"><span>انضم للغرفة</span></button>
+      </div>
+    </div>
+    <p id="mp-menu-error" class="mp-error hidden"></p>
+  </div>
+
+  <!-- شاشة انتظار اللاعب الثاني -->
+  <div id="mp-waiting-screen" class="screen hidden">
+    <div class="bg-bubbles"></div>
+    <div class="loader-ring"></div>
+    <h1 class="game-title mp-title">بانتظار صاحبك...</h1>
+    <p class="game-subtitle">شارك هالكود معه:</p>
+    <div class="mp-code-display" id="mp-code-display">0000</div>
+    <button id="mp-waiting-cancel-btn" class="main-btn secondary-btn"><span>إلغاء</span></button>
+  </div>
+
+  <!-- شاشة اختيار الشخصية (ملتيبلاير) -->
+  <div id="character-select-screen" class="screen hidden">
+    <div class="bg-bubbles"></div>
+    <h1 class="game-title mp-title">اختار شخصيتك</h1>
+    <p class="game-subtitle" id="character-select-hint">لازم تختار شخصية مختلفة عن صاحبك</p>
+    <div class="shop-grid character-grid" id="character-select-grid"></div>
+    <button id="character-confirm-btn" class="main-btn" disabled><span>جاهز! ▶️</span></button>
+    <p class="mp-status" id="character-select-status">بانتظار صاحبك يختار شخصيته...</p>
+  </div>
+
+  <!-- شاشة المتجر -->
+  <div id="shop-screen" class="screen hidden">
+    <div class="bg-bubbles"></div>
+    <button id="shop-back-btn" class="icon-btn corner-btn right-corner" title="رجوع">↩️</button>
+    <h1 class="game-title shop-title">المتجر</h1>
+    <div class="pearls-badge" id="pearls-badge-shop">💎 <span id="pearls-count-shop">0</span></div>
+
+    <div class="shop-scroll">
+      <div class="shop-section">
+        <h2 class="shop-section-title">بدلات كيمو</h2>
+        <div class="shop-grid" id="skins-grid"></div>
+      </div>
+      <div class="shop-section">
+        <h2 class="shop-section-title">البحار</h2>
+        <div class="shop-grid" id="seas-grid"></div>
+      </div>
+      <div class="shop-section">
+        <h2 class="shop-section-title">ترقيات دائمة</h2>
+        <div class="shop-grid" id="upgrades-grid"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- شاشة اللعب -->
+  <div id="game-screen" class="screen hidden">
+    <div id="hud">
+      <img id="hud-avatar" alt="كيمو" class="hud-avatar">
+      <div class="hud-item">
+        <span class="hud-label">الأوكسجين</span>
+        <div class="bar-bg"><div id="oxygen-bar" class="bar-fill oxygen"></div></div>
+      </div>
+      <div class="hud-item score-item">
+        <span class="hud-label">الكنوز</span>
+        <span id="score-display">0</span>
+      </div>
+      <div class="hud-item">
+        <span class="hud-label">القوة</span>
+        <div class="bar-bg"><div id="power-bar" class="bar-fill power"></div></div>
+      </div>
+      <div class="hud-controls">
+        <button id="fullscreen-btn" class="icon-btn hidden" title="شاشة كاملة">⛶</button>
+        <button id="pause-btn" class="icon-btn" title="إيقاف مؤقت">⏸️</button>
+        <button id="mute-btn-game" class="icon-btn" title="صوت">🔊</button>
+      </div>
+    </div>
+    <div id="opponent-hud" class="opponent-hud hidden">
+      <div id="opponent-marker" class="opponent-marker"></div>
+      <span id="opponent-score">0</span> 💎
+    </div>
+    <div id="challenge-banner" class="challenge-banner hidden">
+      <div class="challenge-title" id="challenge-title">⚔️🆕</div>
+      <div class="challenge-desc" id="challenge-desc"></div>
+      <div class="challenge-timer" id="challenge-timer"></div>
+    </div>
+    <div id="challenge-center" class="challenge-center hidden">
+      <div class="challenge-center-box" id="challenge-center-box">
+        <div class="challenge-center-icon" id="challenge-center-icon">⚔️</div>
+        <div class="challenge-center-text" id="challenge-center-text"></div>
+        <button id="challenge-next-btn" class="main-btn hidden"><span>التحدي الجاي ▶️</span></button>
+      </div>
+    </div>
+    <canvas id="game-canvas"></canvas>
+    <div id="touch-controls" class="touch-controls hidden">
+      <button id="touch-up" class="touch-btn touch-up">⬆️</button>
+      <button id="touch-left" class="touch-btn touch-left">⬅️</button>
+      <button id="touch-right" class="touch-btn touch-right">➡️</button>
+      <button id="touch-down" class="touch-btn touch-down">⬇️</button>
+    </div>
+  </div>
+
+  <!-- شاشة الإيقاف المؤقت -->
+  <div id="pause-screen" class="screen hidden overlay-screen">
+    <h1 class="game-title pause-title">إيقاف مؤقت</h1>
+    <div class="btn-row">
+      <button id="resume-btn" class="main-btn"><span>استمرار ▶️</span></button>
+      <button id="home-btn-pause" class="main-btn secondary-btn"><span>الشاشة الرئيسية 🏠</span></button>
+    </div>
+  </div>
+
+  <!-- شاشة النهاية -->
+  <div id="end-screen" class="screen hidden">
+    <div class="bg-bubbles"></div>
+    <div class="rising-bubbles">
+      <span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <h1 class="game-title" id="end-title">خلصت اللعبة!</h1>
+    <div class="hero-frame small">
+      <img id="hero-img-end" alt="كيمو" class="hero-image small">
+    </div>
+    <div class="final-stats">
+      <div class="stat-card">
+        <span class="stat-label">الكنوز</span>
+        <span class="stat-value" id="final-score">0</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">مدة الغطس</span>
+        <span class="stat-value"><span id="final-time">0</span> ث</span>
+      </div>
+      <div class="stat-card pearl-card">
+        <span class="stat-label">لآلئ مكتسبة</span>
+        <span class="stat-value" id="final-pearls">+0</span>
+      </div>
+      <div class="stat-card best-card">
+        <span class="stat-label">🏆 أعلى نتيجة</span>
+        <span class="stat-value" id="best-score-end">0</span>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button id="retry-btn" class="main-btn"><span>حاول مرة ثانية</span></button>
+      <button id="shop-btn-end" class="main-btn secondary-btn"><span>المتجر 🛍️</span></button>
+      <button id="home-btn-end" class="main-btn secondary-btn"><span>الشاشة الرئيسية 🏠</span></button>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script src="assets.js"></script>
+<script src="audio.js"></script>
+<script src="multiplayer.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
